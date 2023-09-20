@@ -1,0 +1,41 @@
+{
+	"name": "Pipeline Load Current Year from SQLDB to Synapse",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow payroll data",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_load_2021_data_from_SQLDB_to_Synapse",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "ls_adls_nycpayroll",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "dirstaging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-09-20T13:48:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
